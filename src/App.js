@@ -1,4 +1,4 @@
-import { Nav, Navbar, Container, Row, Col } from 'react-bootstrap';
+import { Nav, Navbar, Container } from 'react-bootstrap';
 import './App.css';
 import bg from './img/bg.png';
 import data from './data.js';
@@ -10,7 +10,6 @@ function App() {
 
   let [shoes] = useState(data);
   let navigate = useNavigate();
-
 
   return (
     <div className="App">
@@ -48,7 +47,6 @@ function App() {
         </Route>
         <Route path="*" element={<div>없는 페이지 입니다.</div>}/>
       </Routes>
-      
     </div>
   );
 
@@ -60,6 +58,7 @@ function App() {
       </div>
     )
   }
+
   function Card(props) {
     return(
         <div className="col-md-4">
