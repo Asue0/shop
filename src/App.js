@@ -3,7 +3,7 @@ import './App.css';
 import bg from './img/bg.png';
 import data from './data.js';
 import { useState } from 'react';
-import { Routes, Route, Link, useNavigate, Outlet } from 'react-router-dom';
+import { Routes, Route, Link, useNavigate } from 'react-router-dom';
 import Detail from './routes/Detail.js';
 
 function App() {
@@ -18,7 +18,7 @@ function App() {
         <Container>
           <Navbar.Brand href="#home">쇼핑몰</Navbar.Brand>
           <Nav className="me-auto">
-            <Nav.Link href="#home">Home</Nav.Link>
+            <Nav.Link onClick={()=>{ navigate('/') }}>Home</Nav.Link>
             <Nav.Link onClick={()=>{ navigate('/detail') }}>Detail</Nav.Link>
           </Nav>
         </Container>
@@ -28,36 +28,24 @@ function App() {
       <Link to="/detail">상세페이지</Link>
       <Routes>
         <Route path="/" element={
-        <div>
-          <div className="main-bg" style={{ backgroundImage : 'url(' + bg + ')' }}></div>
-          <div className="container">
-            <div className="row">
-              { shoes.map((a, i) => {
-                  return(
-                    <Card shoes={a} i={i}/>
-                  )
-                })}
+          <div>
+            <div className="main-bg" style={{ backgroundImage : 'url(' + bg + ')' }}></div>
+            <div className="container">
+              <div className="row">
+                { shoes.map((a, i) => {
+                    return(
+                      <Card shoes={a} i={i}/>
+                    )
+                  })}
+              </div>
             </div>
-          </div>
-        </div>}/>
-        <Route path="/detail" element={<Detail />}/>
-        <Route path="/about" element={<About />}>
-            <Route path="member" element={<div>자식임1</div>} />
-            <Route path="location" element={<div>자식임2</div>} />
-        </Route>
-        <Route path="*" element={<div>없는 페이지 입니다.</div>}/>
+          </div>}/>
+          <Route path="/detail/:id" element={<Detail shoes={shoes} />}/>
+        
       </Routes>
     </div>
   );
 
-  function About() {
-    return (
-      <div>
-        <h4>회사정보임</h4>
-        <Outlet></Outlet>
-      </div>
-    )
-  }
 
   function Card(props) {
     return(
